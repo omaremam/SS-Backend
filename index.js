@@ -15,4 +15,4 @@ app.use('/api/users',users);
 app.use('/api/auth',auth);
 //app.listen(3000,()=> console.log('\n' +'listening on port 3000 ...'));
 const port = process.env.PORT || 3000;
-app.listen(port,()=> console.log('listening on port ...'));
+app.listen(port,()=> console.log('listening on port no. : ' + port));

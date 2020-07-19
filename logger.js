@@ -1,4 +1,4 @@
-const bcrypt= require('bcryptjs');
+const bcrypt= require('bcrypt');
 const _= require('lodash');
 const {User, validate}= require('./app');
 const mongoose= require('mongoose');
@@ -50,3 +50,6 @@ router.post('/', async(req, res)=>{
   //using lodash
 });
 module.exports= router;
+
+
+
