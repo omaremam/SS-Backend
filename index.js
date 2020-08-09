@@ -9,5 +9,11 @@ mongoose.connect('mongodb://raghda:Gho0nima@cluster0-shard-00-00.1b2jk.mongodb.n
 
 app.use(express.json());
 //app.listen(3000,()=> console.log('\n' +'listening on port 3000 ...'));
+require("./api/services/auth/basic/user.basic.routes")(app);
+require("./api/services/aboutcity/aboutcity.routes")(app);
+require("./api/services/shop/basic/shop.basic.routes")(app);
+require("./api/services/services/services.routes")(app);
+require("./api/services/outings/outing.routes")(app)
+
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log('listening on port ...'));

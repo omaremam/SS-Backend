@@ -17,7 +17,8 @@ const userSchema = mongoose.Schema({
       type: String,
       enum: ["Tourist","Inner_Tourism","Shop_Owner"]
     },
-    isApproved: Boolean
+    isApproved: Boolean,
+    resetPasswordCode: String
 },
     {
         toJSON: {
