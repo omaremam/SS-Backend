@@ -11,4 +11,6 @@ module.exports = app => {
     app.get("/shop/approved", validateRequest, shop.getAllApprovedShops);
 
     app.put("/shop/approve", validateRequest, shop.ApproveShop);
+
+    app.get("shop/myshops",validateRequest,shop.getMyShops)
 }

@@ -4,17 +4,45 @@ var uniqueValidator = require("mongoose-unique-validator");
 const shopSchema = mongoose.Schema({
     id: mongoose.Schema.Types.ObjectId,
     shopOwnerUserId: String,
-    address: {
-        location: { lat: Number, lng: Number },
-        addressWording: String
+    ShopName: {
+        type: String,
+        required: true,
+        minlength: 1,
+        maxlength: 1024
     },
-    shopName: String,
-    shopPhoneNumber: String,
-    shopDescription: String,
-    workingHours: { from: String, to: String },
+    AboutShop: {
+        type: String,
+        required: true,
+        minlength: 10,
+        maxlength: 1024 * 1024
+    },
+    WorkingHours: {
+        type: String,
+        required: true,
+        minlength: 1,
+        maxlength: 128
+    },
+    daysoff: {
+        type: String,
+        required: true,
+        minlength: 1,
+        maxlength: 128
+    },
+    phoneNumber: {
+        type: String,
+        required: true,
+        minlength: 6,
+        maxlength: 128
+    }, location: {
+        type: String,
+        required: true,
+        minlength: 5,
+        maxlength: 1024
+    },
     shopProducts: [String],
     shopImagesUrls: [String],
-    isApproved: Boolean
+    isApproved: Boolean,
+
 },
     {
         toJSON: {
