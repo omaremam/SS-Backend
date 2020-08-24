@@ -79,10 +79,8 @@ function sendEmail(email, code) {
         port: 465,
         secure: true,
         auth: {
-            type: "OAuth2",
-            user: "dev@courzerve.com",
-            serviceClient: key.client_id,
-            privateKey: key.private_key
+            user: "oemam6062379@gmail.com",
+            pass: "u4meandme4u"
         }
     });
 
