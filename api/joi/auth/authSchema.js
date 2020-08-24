@@ -4,10 +4,10 @@ const userCreationSchema = Joi.object({
     email: Joi.string().email().required(),
     password: Joi.string().min(6).required(),
     name: Joi.string().required(),
-    nationality: Joi.string(),
-    phoneNumber: Joi.string(),
-    age: Joi.string(),
-    gender: Joi.string(),
+    nationality: Joi.string().required(),
+    phoneNumber: Joi.string().required(),
+    age: Joi.string().required(),
+    gender: Joi.string().required(),
     userType: Joi.string().required()
 })
 
