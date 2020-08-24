@@ -5,6 +5,7 @@ const outingCreationSchema = Joi.object({
     outingDescription: Joi.string().required(),
     outingPrice: Joi.string().required(),
     howToReserve: Joi.string().required(),
+    outingType: Joi.string().required()
 }).required()
 
 
