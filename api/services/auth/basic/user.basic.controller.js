@@ -9,7 +9,6 @@ exports.signUp = async (req, res) => {
         let user = new User(req.body);
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(user.password, salt);
-        user.isApproved = user.userType != "Shop_Owner"
         await user.save();
         res.status(200).send({ message: "User Successfully registered" })
     }

@@ -9,7 +9,9 @@ const shopCreationSchema = Joi.object({
     phoneNumber: Joi.string().min(4).max(128).required(),
     location: Joi.string().min(5).max(1024).required(),
     shopProducts: Joi.array().items(Joi.string().required()),
-    shopImagesUrls: Joi.array().items(Joi.string().required())
+    shopImagesUrls: Joi.array().items(Joi.string().required()),
+    commercialRegNum: Joi.string().min(4).max(25).required(),
+    IDnumber: Joi.string().min(8).max(14).required(),
 })
 
 module.exports = {

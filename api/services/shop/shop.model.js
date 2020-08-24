@@ -42,7 +42,18 @@ const shopSchema = mongoose.Schema({
     shopProducts: [String],
     shopImagesUrls: [String],
     isApproved: Boolean,
-
+    commercialRegNum: {
+        type: String,
+        required: true,
+        minlength: 4,
+        maxlength: 25
+    },
+    IDnumber: {
+        type: String,
+        required: true,
+        minlength: 8,
+        maxlength: 14
+    }
 },
     {
         toJSON: {
