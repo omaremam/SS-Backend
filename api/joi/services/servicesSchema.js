@@ -7,7 +7,15 @@ const serviceCreationSchema = Joi.object({
     expectedPriceRange: Joi.object({
         from: Joi.string().required(),
         to: Joi.string().required()
-    }).required()
+    }),
+    busStops: Joi.array().items(Joi.object({
+        location: Joi.object({
+            lat: Joi.number().required(),
+            lng: Joi.number().required(),
+            loc: Joi.string().required()
+        }).required(),
+        busArrivalTimes: Joi.array().items(Joi.string().required())
+    }).required())
 }).required()
 
 module.exports = {

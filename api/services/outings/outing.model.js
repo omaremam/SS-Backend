@@ -5,7 +5,11 @@ const outingSchema = mongoose.Schema({
     outingName: String,
     outingPrice: String,
     outingDescription: String,
-    howToReserve: String
+    howToReserve: String,
+    outingType: {
+        type: String,
+        enum: ["EVENT","ACTIVITY"]
+    }
 },
     {
         toJSON: {
@@ -18,5 +22,5 @@ const outingSchema = mongoose.Schema({
     }
 )
 
-const Outing = mongoose.model("outings",outingSchema);
+const Outing = mongoose.model("outings", outingSchema);
 module.exports = Outing;

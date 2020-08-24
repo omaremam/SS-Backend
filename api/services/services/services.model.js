@@ -6,6 +6,14 @@ const servicesSchema = mongoose.Schema({
     serviceType: String,
     serviceDescription: String,
     expectedPriceRange: { from: String, to: String },
+    busStops: [{
+        location: {
+            lat: Number,
+            lng: Number,
+            loc: String
+        },
+        busArrivalTimes: [String]
+    }]
 },
     {
         toJSON: {

@@ -6,5 +6,7 @@ module.exports = app => {
 
     app.post("/outing",validateRequest,outing.createOuting)
 
-    app.get("/outing",validateRequest,outing.getAllOutings)
+    app.get("/activity",validateRequest,outing.getAllActivities)
+
+    app.get("/event",validateRequest,outing.getAllEvents)
 }
