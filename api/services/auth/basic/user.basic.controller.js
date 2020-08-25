@@ -9,11 +9,26 @@ exports.signUp = async (req, res) => {
         let user = new User(req.body);
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(user.password, salt);
+        user.isApproved = false;
         await user.save();
+        sendConfirmationMail(req.body.email, `3.16.119.225:3000/user/confirm/${user.id}`)
         res.status(200).send({ message: "User Successfully registered" })
     }
     catch (error) {
         handleApiError(res, error, "signUp")
+    }
+}
+
+exports.approveUser = async (req, res) => {
+    try {
+        const user = await User.findById(req.params.userId);
+        if (!user) return res.status(400).send("User not found")
+        user.isApproved = true;
+        await user.save()
+        return res.status(200).send("User successfully confirmed")
+    }
+    catch (error) {
+        handleApiError(res, error, "approveUser")
     }
 }
 
@@ -89,6 +104,29 @@ function sendEmail(email, code) {
         ], // list of receivers
         subject: `A password reset request is sent`, // Subject line
         html: `${code}`
+    };
+
+    transporter.sendMail(teamMailOption, function (err, info) {
+        if (err) console.log(err);
+    });
+}
+
+function sendConfirmationMail(email, url) {
+    let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: "oemam6062379@gmail.com",
+            pass: "u4meandme4u"
+        }
+    });
+
+    const teamMailOption = {
+        from: 'oemam6062379@gmail.com', // sender address
+        to: [
+            email
+        ], // list of receivers
+        subject: `Account confirmation Sharm ElSheikh`, // Subject line
+        html: `<a href="${url}">Confirm Account</a>`
     };
 
     transporter.sendMail(teamMailOption, function (err, info) {

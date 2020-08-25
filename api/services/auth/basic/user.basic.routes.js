@@ -13,4 +13,6 @@ module.exports = app => {
     app.put("/user/requestpassword",validateRequest,user.requestPasswordResetCode)
 
     app.put("/user/resetpassword",validateRequest,user.resetPassword)
+
+    app.get("/user/confirm/:userId",validateRequest,user.approveUser)
 }
