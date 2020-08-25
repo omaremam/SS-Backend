@@ -11,7 +11,7 @@ exports.signUp = async (req, res) => {
         user.password = await bcrypt.hash(user.password, salt);
         user.isApproved = false;
         await user.save();
-        sendConfirmationMail(req.body.email, `http://3.16.119.225:3000/user/confirm/${user.id}`)
+        sendConfirmationMail(req.body.email, `http://3.16.119.225:3000/user/confirm/${user._id}`)
         res.status(200).send({ message: "User Successfully registered" })
     }
     catch (error) {
