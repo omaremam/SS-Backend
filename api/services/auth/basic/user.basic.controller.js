@@ -36,6 +36,7 @@ exports.signIn = async (req, res) => {
     try {
         let user = await User.findOne({ email: req.body.email });
         if (!user) return res.status(400).send('Invalid email or password');
+        if(!user.isApproved) return res.status(400).send("User not confirmed yet")
         const validpassword = await bcrypt.compare(req.body.password, user.password);
         if (!validpassword) return res.status(400).send('Invalid email or password');
         res.status(200).send(user);
