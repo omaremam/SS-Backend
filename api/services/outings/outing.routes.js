@@ -9,4 +9,6 @@ module.exports = app => {
     app.get("/activity",validateRequest,outing.getAllActivities)
 
     app.get("/event",validateRequest,outing.getAllEvents)
+
+    app.delete("/outing",validateRequest,outing.deleteOuting)
 }

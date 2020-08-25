@@ -32,3 +32,13 @@ exports.getAllEvents = async (req, res) => {
         handleApiError(res, error, "getAllEvents")
     }
 }
+
+exports.deleteOuting = async (req,res) => {
+    try{
+        await Outing.findByIdAndDelete(req.headers.id);
+        return res.status(200).send("Outing successfully deleted")
+    }
+    catch(error){
+        handleApiError(res, error, "deleteOuting")
+    }
+}
