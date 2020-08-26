@@ -25,7 +25,7 @@ exports.resendConfirmationEmail = async (req, res) => {
         const user = await User.findOne({ email: req.headers.email });
         if (!user) return res.status(400).send({ error: "User not found" })
         if (user.isApproved) return res.status(400).send({ error: "Account already verified" })
-        sendConfirmationMail(req.body.email, `http://3.16.119.225:3000/user/confirm/${user._id}`, user.name);
+        sendConfirmationMail(req.headers.email, `http://3.16.119.225:3000/user/confirm/${user._id}`, user.name);
         return res.status(200).send({ message: "Email confirmation successfully resent" })
     }
     catch (error) {
