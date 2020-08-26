@@ -15,6 +15,6 @@ app.use(express.json());
 app.use('/api/users',users);
 app.use('/api/auth',auth);
 app.use('/api/service',services);
-//app.listen(3000,()=> console.log('\n' +'listening on port 3000 ...'));
+//app.listen(3000,()=> console.log('\n' +'listening on port 3000 .....//'));
 const port = process.env.PORT || 3000;
 app.listen(port,()=> console.log('listening on port no. : ' + port));
