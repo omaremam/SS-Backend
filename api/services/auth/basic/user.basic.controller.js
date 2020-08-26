@@ -104,7 +104,12 @@ function sendEmail(email, code) {
             email
         ], // list of receivers
         subject: `A password reset request is sent`, // Subject line
-        html: `${code}`
+        html: `<h3><strong>Hello!</strong></h3>
+        <p>We received a request to reset your password.</p>
+        <p><strong>You need to enter the following code:</strong></p>
+        <h2 style="color:cornflowerblue;"><strong>${code}</strong></h2>
+        <h5><p>If you did not request a new password you need to secure your account.</p></h5>
+        <p><strong>Thanks,</strong></p>`
     };
 
     transporter.sendMail(teamMailOption, function (err, info) {
@@ -127,7 +132,40 @@ function sendConfirmationMail(email, url) {
             email
         ], // list of receivers
         subject: `Account confirmation Sharm ElSheikh`, // Subject line
-        html: `<a href="${url}">Confirm Account</a>`
+        html: `<html>
+    
+
+        <h2 style="color:  rgb(122,187,232);"><strong>Hello!</strong></h2>
+        <h3><p style="color: rgb(122,187,232);">Your registeration is almost done!</p></h3>
+        <style>
+            
+            </style>
+        <p>Press the below button to verify your email address to complete creating your account:</p>
+        <head >
+            
+            <style>
+              .button {
+                background-color: #2a8307;
+                border: solid;
+                color: white;
+                padding: 10px 25px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 20px;
+                margin: 4px 2px;
+                cursor: pointer;
+              }
+            </style>
+          </head>
+          <body>
+            <a href="${url}" class="button">Verify my Account</a>
+          </body>
+        <h6><p style="color:rgb(85,95,107);">We require a verified email address so you can take the full advantage of all the app features, and also you can safely recover your account in the future.</p></h6>
+        
+        <h6><p style="color:rgb(85,95,107);">If you did not recently attempt to create a new account with this email address. you can safely disregard this email.</p></h6>
+        <h6><p style="color:rgb(85,95,107);">Thanks for helping us ensure your new account is secure,</p></html>
+        </h6>`
     };
 
     transporter.sendMail(teamMailOption, function (err, info) {
