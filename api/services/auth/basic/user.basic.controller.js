@@ -138,7 +138,7 @@ function sendConfirmationMail(email, url, name, isResent) {
         html = `<html>
         <h2 style="color:  rgb(51, 116, 255);"><strong>Hello ${name}!</strong></h2>
         <h3><p style="color: rgb(51, 116, 255);">Your registeration is almost done!</p></h3>
-        <p>You recentily requested another confirmation mail to be sent, Press the below button to verify your email address to complete creating your account:</p>
+        <p>You recently requested another confirmation mail to be sent, Press the below button to verify your email address to complete creating your account:</p>
             
             <style>
               .button {
