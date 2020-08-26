@@ -36,7 +36,7 @@ exports.signIn = async (req, res) => {
     try {
         let user = await User.findOne({ email: req.body.email });
         if (!user) return res.status(400).send('Invalid email or password');
-        if(!user.isApproved) return res.status(400).send("User not confirmed yet")
+        if (!user.isApproved) return res.status(400).send("User not confirmed yet")
         const validpassword = await bcrypt.compare(req.body.password, user.password);
         if (!validpassword) return res.status(400).send('Invalid email or password');
         res.status(200).send(user);
@@ -93,8 +93,8 @@ function sendEmail(email, code) {
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: "oemam6062379@gmail.com",
-            pass: "u4meandme4u"
+            user: 'sharmelshiikh@gmail.com',
+            pass: 'sharm2020'
         }
     });
 
@@ -121,8 +121,8 @@ function sendConfirmationMail(email, url) {
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: "oemam6062379@gmail.com",
-            pass: "u4meandme4u"
+            user: 'sharmelshiikh@gmail.com',
+            pass: 'sharm2020'
         }
     });
 
