@@ -1,6 +1,7 @@
 const handleApiError = require("../../../utils/ErrorHandler");
 const User = require("../user.model");
 const bcrypt = require('bcryptjs');
+const fs = require("fs");
 var nodemailer = require("nodemailer");
 
 
@@ -25,7 +26,9 @@ exports.approveUser = async (req, res) => {
         if (!user) return res.status(400).send("User not found")
         user.isApproved = true;
         await user.save()
-        return res.status(200).send("User successfully confirmed")
+        fs.readFile('../../../utils/confirmemail.html', (err, file) => {
+            return res.status(200).sendFile(file)
+        })
     }
     catch (error) {
         handleApiError(res, error, "approveUser")
@@ -161,11 +164,11 @@ function sendConfirmationMail(email, url) {
           <body>
             <a href="${url}" class="button">Verify my Account</a>
           </body>
-        <h6><p style="color:rgb(85,95,107);">We require a verified email address so you can take the full advantage of all the app features, and also you can safely recover your account in the future.</p></h6>
+        <h4><p style="color:rgb(85,95,107);">We require a verified email address so you can take the full advantage of all the app features, and also you can safely recover your account in the future.</p></h4>
         
-        <h6><p style="color:rgb(85,95,107);">If you did not recently attempt to create a new account with this email address. you can safely disregard this email.</p></h6>
-        <h6><p style="color:rgb(85,95,107);">Thanks for helping us ensure your new account is secure,</p></html>
-        </h6>`
+        <h4><p style="color:rgb(85,95,107);">If you did not recently attempt to create a new account with this email address. you can safely disregard this email.</p></h4>
+        <h4><p style="color:rgb(85,95,107);">Thanks for helping us ensure your new account is secure,</p></html>
+        </h4>`
     };
 
     transporter.sendMail(teamMailOption, function (err, info) {

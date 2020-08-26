@@ -23,6 +23,7 @@
     "delegates": "^1.0.0",
     "detect-libc": "^1.0.3",
     "express": "^4.17.1",
+    "fs": "0.0.1-security",
     "fs-minipass": "^1.2.7",
     "fs.realpath": "^1.0.0",
     "gauge": "^2.7.4",
