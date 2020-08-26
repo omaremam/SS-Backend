@@ -1,10 +1,14 @@
 const handleApiError = require("../../../utils/ErrorHandler");
 const Shop = require("../shop.model");
+const User = require("../../auth/user.model")
 
 exports.createShop = async (req, res) => {
     try {
         const shop = new Shop(req.body);
         shop.isApproved = false;
+        const user = await User.findById(shop.shopOwnerUserId)
+        if (!user) return res.status(400).send({ error: "User not found" });
+        if (user.userType != "Shop_Owner") return res.status(400).send({ error: "User specified is not registered as a shop owner" })
         await shop.save();
         return res.status(200).send({ message: "Shop successfully added" })
     }
