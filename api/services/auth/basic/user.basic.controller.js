@@ -26,10 +26,7 @@ exports.approveUser = async (req, res) => {
         if (!user) return res.status(400).send("User not found")
         user.isApproved = true;
         await user.save()
-        fs.readFile('../../../utils/confirmemail.html', (err, file) => {
-            console.log("hhhhhhh")
-            return res.status(200).sendFile(file)
-        })
+        return res.status(200).sendFile("../../../utils/confirmemail.html")
     }
     catch (error) {
         handleApiError(res, error, "approveUser")
