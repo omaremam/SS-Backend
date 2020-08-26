@@ -175,7 +175,6 @@ function sendConfirmationMail(email, url, name) {
         
         <h4><p style="color:rgb(0,0,0);">If you did not recently attempt to create a new account with this email address. you can safely disregard this email.</p></h4>
         <h4><p style="color:rgb(85,95,107);">Thanks for helping us ensure your new account is secure,</p>
-        <h4><p style="color:rgb(85,95,107);">Best regards,</p></h4>
         <h4><p style="color:rgb(85,95,107);">Sharm El-Sheikh Team</p></h4></html>
         </h4>`
     };
