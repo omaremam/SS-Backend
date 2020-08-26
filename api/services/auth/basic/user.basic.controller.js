@@ -132,24 +132,40 @@ function sendEmail(email, code, name) {
     });
 }
 
-function sendConfirmationMail(email, url, name) {
-    let transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: 'sharmelshiikh@gmail.com',
-            pass: 'sharm2020'
-        }
-    });
-
-    const teamMailOption = {
-        from: 'sharmelshiikh@gmail.com', // sender address
-        to: [
-            email
-        ], // list of receivers
-        subject: `Account confirmation Sharm ElSheikh`, // Subject line
-        html: `<html>
-    
-
+function sendConfirmationMail(email, url, name, isResent) {
+    var html;
+    if (isResent) {
+        html = `<html>
+        <h2 style="color:  rgb(51, 116, 255);"><strong>Hello ${name}!</strong></h2>
+        <h3><p style="color: rgb(51, 116, 255);">Your registeration is almost done!</p></h3>
+        <p>You recentily requested another confirmation mail to be sent, Press the below button to verify your email address to complete creating your account:</p>
+            
+            <style>
+              .button {
+                background-color: #3374FF;
+                border-radius: 15px;
+                width: 175px;
+                color: white;
+                padding: 10px 25px;
+                text-align: center;
+                text-decoration: none;
+                display: block;
+                font-size: 16px;
+                margin-right: auto;
+                margin-left: auto;
+                cursor: pointer;
+              }
+            </style>
+            <a href="${url}" class="button">Verify my account</a>
+        <h4><p style="color:rgb(0,0,0);">We require a verified email address so you can take the full advantage of all the app features, and also you can safely recover your account in the future.</p></h4>
+        
+        <h4><p style="color:rgb(0,0,0);">If you did not recently attempt to create a new account with this email address. you can safely disregard this email.</p></h4>
+        <h4><p style="color:rgb(85,95,107);">Thanks for helping us ensure your new account is secure,</p>
+        <h4><p style="color:rgb(85,95,107);">Sharm El-Sheikh Team</p></h4></html>
+        </h4>`
+    }
+    else {
+        html = `<html>
         <h2 style="color:  rgb(51, 116, 255);"><strong>Hello ${name}!</strong></h2>
         <h3><p style="color: rgb(51, 116, 255);">Your registeration is almost done!</p></h3>
         <p>Press the below button to verify your email address to complete creating your account:</p>
@@ -176,7 +192,22 @@ function sendConfirmationMail(email, url, name) {
         <h4><p style="color:rgb(0,0,0);">If you did not recently attempt to create a new account with this email address. you can safely disregard this email.</p></h4>
         <h4><p style="color:rgb(85,95,107);">Thanks for helping us ensure your new account is secure,</p>
         <h4><p style="color:rgb(85,95,107);">Sharm El-Sheikh Team</p></h4></html>
-        </h4>`
+        </h4>`}
+    let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'sharmelshiikh@gmail.com',
+            pass: 'sharm2020'
+        }
+    });
+
+    const teamMailOption = {
+        from: 'sharmelshiikh@gmail.com', // sender address
+        to: [
+            email
+        ], // list of receivers
+        subject: `Account confirmation Sharm ElSheikh`, // Subject line
+        html: html
     };
 
     transporter.sendMail(teamMailOption, function (err, info) {
