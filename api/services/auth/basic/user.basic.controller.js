@@ -25,7 +25,7 @@ exports.approveUser = async (req, res) => {
         if (!user) return res.status(400).send("User not found")
         user.isApproved = true;
         await user.save()
-        return res.status(200).sendFile("../../../utils/confirmemail.html")
+        return res.status(200).sendFile("../../../utils/confirmemail.html",{ root: __dirname })
     }
     catch (error) {
         handleApiError(res, error, "approveUser")
