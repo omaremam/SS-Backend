@@ -33,6 +33,22 @@ exports.resendConfirmationEmail = async (req, res) => {
     }
 }
 
+exports.changePassword = async (req, res) => {
+    try {
+        const user = await User.findOne({ email: req.body.email })
+        if (!user) return res.status(400).send({ error: "User not found" });
+        const salt = await bcrypt.genSalt(10);
+        const validpassword = await bcrypt.compare(req.body.oldPassword, user.password);
+        if (!validpassword) return res.status(400).send({ error: "Password is not correct" });
+        user.password = await bcrypt.hash(req.body.newPassword, salt);
+        await user.save()
+        return res.status(200).send({ message: "Password successfully changed" });
+    }
+    catch (error) {
+        handleApiError(res, error, "changePassword")
+    }
+}
+
 exports.approveUser = async (req, res) => {
     try {
         const user = await User.findById(req.params.userId);

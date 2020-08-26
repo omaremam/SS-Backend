@@ -17,4 +17,6 @@ module.exports = app => {
     app.get("/user/confirm/:userId",validateRequest,user.approveUser)
 
     app.put("/user/confirm/resend",validateRequest,user.resendConfirmationEmail);
+
+    app.put("/user/changepassword",validateRequest,user.changePassword);
 }

@@ -21,8 +21,15 @@ const resetPassword = Joi.object({
     code: Joi.string().required(),
     newPassword: Joi.string().min(6).required()
 })
+
+const changePassword = Joi.object({
+    email: Joi.string().email().required(),
+    oldPassword: Joi.string().required(),
+    newPassword: Joi.string().min(6).required()
+})
 module.exports = {
     "/user/register": userCreationSchema,
     "/user/signin": userSignIn,
-    "/user/resetpassword": resetPassword
+    "/user/resetpassword": resetPassword,
+    "/user/changepassword": changePassword
 }
