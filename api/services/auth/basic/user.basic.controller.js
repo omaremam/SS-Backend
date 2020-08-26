@@ -118,11 +118,11 @@ function sendEmail(email, code, name) {
             email
         ], // list of receivers
         subject: `A password reset request is sent`, // Subject line
-        html: `<h3><strong>Hello ${name}!</strong></h3>
+        html: `<h2 style="color:  rgb(51, 116, 255);"><strong>Hello ${name}!</strong></h2>
         <p>We received a request to reset your password.</p>
         <p><strong>You need to enter the following code:</strong></p>
         <h2 style="color:cornflowerblue;"><strong>${code}</strong></h2>
-        <h5><p>If you did not request a new password you need to secure your account.</p></h5>
+        <h5><p>If you did not request a new password please ignore this email.</p></h5>
         <h4><p style="color:rgb(85,95,107);">Best regards,</p></h4>
         <h4><p style="color:rgb(85,95,107);">Sharm El-Sheikh Team</p></h4>`
     };
