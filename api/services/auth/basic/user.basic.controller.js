@@ -1,7 +1,6 @@
 const handleApiError = require("../../../utils/ErrorHandler");
 const User = require("../user.model");
 const bcrypt = require('bcryptjs');
-const fs = require("fs");
 var nodemailer = require("nodemailer");
 
 
