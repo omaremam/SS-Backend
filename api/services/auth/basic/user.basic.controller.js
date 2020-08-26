@@ -20,15 +20,15 @@ exports.signUp = async (req, res) => {
     }
 }
 
-exports.resendConfirmationEmail = async (req,res) => {
-    try{
-        const user = await User.findOne({email: req.headers.email});
-        if(!user) return res.status(400).send({error: "User not found"})
-        if(user.isApproved) return res.status(400).send({error: "Account already verified"})
-        sendConfirmationMail(req.body.email,`http://3.16.119.225:3000/user/confirm/${user._id}`);
-        return res.status(200).send({message: "Email confirmation successfully resent"})
+exports.resendConfirmationEmail = async (req, res) => {
+    try {
+        const user = await User.findOne({ email: req.headers.email });
+        if (!user) return res.status(400).send({ error: "User not found" })
+        if (user.isApproved) return res.status(400).send({ error: "Account already verified" })
+        sendConfirmationMail(req.body.email, `http://3.16.119.225:3000/user/confirm/${user._id}`, user.name);
+        return res.status(200).send({ message: "Email confirmation successfully resent" })
     }
-    catch(error){
+    catch (error) {
         handleApiError(res, error, "resendConfirmationEmail")
     }
 }
@@ -77,7 +77,7 @@ exports.requestPasswordResetCode = async (req, res) => {
         const user = await User.findOne({ email: req.headers.email });
         if (!user) return res.status(400).send({ error: "User does not exist" });
         user.resetPasswordCode = Math.random().toString(36).substring(7);
-        sendEmail(req.headers.email, user.resetPasswordCode);
+        sendEmail(req.headers.email, user.resetPasswordCode, user.name);
         await user.save();
         res.status(200).send({ message: "Successfully sent email for password reset" })
     }
@@ -103,7 +103,7 @@ exports.resetPassword = async (req, res) => {
 }
 
 
-function sendEmail(email, code) {
+function sendEmail(email, code, name) {
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -113,12 +113,12 @@ function sendEmail(email, code) {
     });
 
     const teamMailOption = {
-        from: 'oemam6062379@gmail.com', // sender address
+        from: 'sharmelshiikh@gmail.com', // sender address
         to: [
             email
         ], // list of receivers
         subject: `A password reset request is sent`, // Subject line
-        html: `<h3><strong>Hello!</strong></h3>
+        html: `<h3><strong>Hello ${name}!</strong></h3>
         <p>We received a request to reset your password.</p>
         <p><strong>You need to enter the following code:</strong></p>
         <h2 style="color:cornflowerblue;"><strong>${code}</strong></h2>
@@ -131,7 +131,7 @@ function sendEmail(email, code) {
     });
 }
 
-function sendConfirmationMail(email, url) {
+function sendConfirmationMail(email, url, name) {
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -141,7 +141,7 @@ function sendConfirmationMail(email, url) {
     });
 
     const teamMailOption = {
-        from: 'oemam6062379@gmail.com', // sender address
+        from: 'sharmelshiikh@gmail.com', // sender address
         to: [
             email
         ], // list of receivers
@@ -149,8 +149,8 @@ function sendConfirmationMail(email, url) {
         html: `<html>
     
 
-        <h2 style="color:  rgb(122,187,232);"><strong>Hello!</strong></h2>
-        <h3><p style="color: rgb(122,187,232);">Your registeration is almost done!</p></h3>
+        <h2 style="color:  rgb(51, 116, 255);"><strong>Hello ${name}!</strong></h2>
+        <h3><p style="color: rgb(51, 116, 255);">Your registeration is almost done!</p></h3>
         <style>
             
             </style>
@@ -159,25 +159,27 @@ function sendConfirmationMail(email, url) {
             
             <style>
               .button {
-                background-color: #2a8307;
-                border: solid;
+                background-color: #3374FF;
+                border-radius: 15px;
+                width: 175px;
                 color: white;
                 padding: 10px 25px;
                 text-align: center;
                 text-decoration: none;
-                display: inline-block;
-                font-size: 20px;
-                margin: 4px 2px;
+                display: block;
+                font-size: 16px;
+                margin-right: auto;
+                margin-left: auto;
                 cursor: pointer;
               }
             </style>
           </head>
           <body>
-            <a href="${url}" class="button">Verify my Account</a>
+            <a href="${url}" class="button">Verify my account</a>
           </body>
-        <h4><p style="color:rgb(85,95,107);">We require a verified email address so you can take the full advantage of all the app features, and also you can safely recover your account in the future.</p></h4>
+        <h4><p style="color:rgb(0,0,0);">We require a verified email address so you can take the full advantage of all the app features, and also you can safely recover your account in the future.</p></h4>
         
-        <h4><p style="color:rgb(85,95,107);">If you did not recently attempt to create a new account with this email address. you can safely disregard this email.</p></h4>
+        <h4><p style="color:rgb(0,0,0);">If you did not recently attempt to create a new account with this email address. you can safely disregard this email.</p></h4>
         <h4><p style="color:rgb(85,95,107);">Thanks for helping us ensure your new account is secure,</p></html>
         </h4>`
     };
