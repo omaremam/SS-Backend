@@ -12,7 +12,7 @@ exports.signUp = async (req, res) => {
         user.password = await bcrypt.hash(user.password, salt);
         user.isApproved = false;
         await user.save();
-        sendConfirmationMail(req.body.email, `http://3.16.119.225:3000/user/confirm/${user._id}`,user.name)
+        sendConfirmationMail(req.body.email, `http://3.16.119.225:3000/user/confirm/${user._id}`, user.name)
         res.status(200).send({ message: "User Successfully registered" })
     }
     catch (error) {
@@ -123,7 +123,7 @@ function sendEmail(email, code, name) {
         <p><strong>You need to enter the following code:</strong></p>
         <h2 style="color:cornflowerblue;"><strong>${code}</strong></h2>
         <h5><p>If you did not request a new password you need to secure your account.</p></h5>
-        <p><strong>Thanks,</strong></p>`
+        <h4><p style="color:rgb(85,95,107);">Best regards, Sharm ElSheikh team</p></h4>`
     };
 
     transporter.sendMail(teamMailOption, function (err, info) {
@@ -151,11 +151,7 @@ function sendConfirmationMail(email, url, name) {
 
         <h2 style="color:  rgb(51, 116, 255);"><strong>Hello ${name}!</strong></h2>
         <h3><p style="color: rgb(51, 116, 255);">Your registeration is almost done!</p></h3>
-        <style>
-            
-            </style>
         <p>Press the below button to verify your email address to complete creating your account:</p>
-        <head >
             
             <style>
               .button {
@@ -173,14 +169,12 @@ function sendConfirmationMail(email, url, name) {
                 cursor: pointer;
               }
             </style>
-          </head>
-          <body>
             <a href="${url}" class="button">Verify my account</a>
-          </body>
         <h4><p style="color:rgb(0,0,0);">We require a verified email address so you can take the full advantage of all the app features, and also you can safely recover your account in the future.</p></h4>
         
         <h4><p style="color:rgb(0,0,0);">If you did not recently attempt to create a new account with this email address. you can safely disregard this email.</p></h4>
-        <h4><p style="color:rgb(85,95,107);">Thanks for helping us ensure your new account is secure,</p></html>
+        <h4><p style="color:rgb(85,95,107);">Thanks for helping us ensure your new account is secure,</p>
+        <h4><p style="color:rgb(85,95,107);">Best regards, Sharm ElSheikh team</p></h4></html>
         </h4>`
     };
 
