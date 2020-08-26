@@ -1,6 +1,7 @@
 const handleApiError = require("../../../utils/ErrorHandler");
 const User = require("../user.model");
 const bcrypt = require('bcryptjs');
+const path = require("path");
 var nodemailer = require("nodemailer");
 
 
@@ -25,7 +26,7 @@ exports.approveUser = async (req, res) => {
         if (!user) return res.status(400).send("User not found")
         user.isApproved = true;
         await user.save()
-        return res.status(200).sendFile("./api/utils/confimemail.html",{ root: __dirname })
+        return res.status(200).sendFile(path.resolve("../../../utils/confirmemail.html"))
     }
     catch (error) {
         handleApiError(res, error, "approveUser")
