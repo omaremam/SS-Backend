@@ -13,4 +13,6 @@ module.exports = app => {
     app.put("/shop/approve", validateRequest, shop.ApproveShop);
 
     app.get("/shop/myshops",validateRequest,shop.getMyShops)
+
+    app.delete("/shop",validateRequest,shop.deleteShop)
 }

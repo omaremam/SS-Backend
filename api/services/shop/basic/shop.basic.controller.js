@@ -17,6 +17,16 @@ exports.createShop = async (req, res) => {
     }
 }
 
+exports.deleteShop = async (req,res) => {
+    try{
+        await Shop.findByIdAndDelete(req.headers.shopid);
+        return res.status(200).send({message: "Shop successfully deleted"})
+    }
+    catch(error){
+        handleApiError(res, error, "deleteShop")
+    }
+}
+
 exports.ApproveShop = async (req, res) => {
     try {
         const shop = await Shop.findById(req.headers.shopid);
