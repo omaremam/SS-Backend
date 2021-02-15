@@ -9,6 +9,7 @@ const userCreationSchema = Joi.object({
     age: Joi.string().required(),
     gender: Joi.string().required(),
     userType: Joi.string().required()
+    //a 
 })
 
 const userSignIn = Joi.object({
