@@ -18,7 +18,7 @@
     "deep-extend": "^0.6.0",
     "delegates": "^1.0.0",
     "detect-libc": "^1.0.3",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "fs-minipass": "^1.2.7",
     "fs.realpath": "^1.0.0",
     "gauge": "^2.7.4",
